@@ -11,6 +11,7 @@ import org.gradle.api.tasks.Copy
 import org.gradle.api.publish.maven.MavenPublication
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.testing.jacoco.tasks.JacocoReport
+import java.util.Properties
 
 plugins {
     `java-library`
@@ -28,6 +29,17 @@ version = "2.0.0-SNAPSHOT"
 description = "powernukkitx"
 java.sourceCompatibility = JavaVersion.VERSION_21
 java.targetCompatibility = JavaVersion.VERSION_21
+
+val gitCommit: String by lazy {
+    val props = Properties()
+    val file = file("$buildDir/resources/main/git.properties")
+    if (file.exists()) {
+        file.inputStream().use(props::load)
+        props.getProperty("git.commit.id.abbrev") ?: "nogit"
+    } else {
+        "nogit"
+    }
+}
 
 // Constants
 val SHADOW_JAR = "shadowJar"
@@ -101,34 +113,6 @@ idea {
             file("build"),
             file("out")
         ))
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            setSrcDirs(listOf(
-                "powernukkitx-server/src/main/java"
-            ))
-        }
-        resources {
-            setSrcDirs(listOf(
-                "powernukkitx-server/src/main/resources"
-            ))
-        }
-    }
-
-    test {
-        java {
-            setSrcDirs(listOf(
-                "powernukkitx-server/src/test/java"
-            ))
-        }
-        resources {
-            setSrcDirs(listOf(
-                "powernukkitx-server/src/test/resources"
-            ))
-        }
     }
 }
 
@@ -246,6 +230,7 @@ tasks.withType<AbstractArchiveTask> {
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+    archiveFileName.set("powernukkit-server-$version-$gitCommit.jar")
     dependsOn("copyDependencies")
 
     manifest {
@@ -276,7 +261,6 @@ tasks.named<ShadowJar>("shadowJar") {
     mergeServiceFiles()
 
     destinationDirectory.set(layout.buildDirectory)
-    archiveFileName.set("${project.description}.jar")
 
     // Enable ZIP64 format for large archives (>4GB)
     isZip64 = true
