@@ -2,7 +2,6 @@ package cn.nukkit.level.generator.feature.decoration;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockAir;
-import cn.nukkit.block.BlockLeafLitter;
 import cn.nukkit.block.BlockWildflowers;
 import cn.nukkit.block.property.enums.MinecraftCardinalDirection;
 import cn.nukkit.level.Level;
