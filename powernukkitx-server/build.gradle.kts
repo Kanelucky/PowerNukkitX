@@ -230,7 +230,7 @@ tasks.withType<AbstractArchiveTask> {
 }
 
 tasks.named<ShadowJar>("shadowJar") {
-    archiveFileName.set("powernukkitx-server-$version-$gitCommit.jar")
+    archiveFileName.set("${project.description}-server-$version-$gitCommit.jar")
     dependsOn("copyDependencies")
 
     manifest {
