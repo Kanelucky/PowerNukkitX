@@ -83,6 +83,7 @@ snappy               = { module = "org.xerial.snappy:snappy-java",              
 rng-simple           = { module = "org.apache.commons:commons-rng-simple",          version.ref = "commons-rng"                                     }
 rng-sampling         = { module = "org.apache.commons:commons-rng-sampling",        version.ref = "commons-rng"                                     }
 bedrock-connection   = { module = "org.powernukkitx.protocol:bedrock-connection",   version.ref = "bedrock-protocol"                                }
+javapoet = { module = "com.palantir.javapoet:javapoet", version = "0.19.0" }
 
 [bundles]
 terminal        = ["jline-reader",      "jline-terminal",   "jline-terminaljni",    "consoleappender"   ]

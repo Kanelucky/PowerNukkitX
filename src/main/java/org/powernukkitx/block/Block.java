@@ -6,6 +6,8 @@ import org.powernukkitx.block.customblock.CustomBlockComponentBehavior;
 import org.powernukkitx.block.customblock.CustomBlockDefinition;
 import org.powernukkitx.block.customblock.CustomBlockDefinition.BlockTickSettings;
 import org.powernukkitx.block.property.type.BlockPropertyType;
+import org.powernukkitx.block.type.BlockType;
+import org.powernukkitx.block.type.BlockTypes;
 import org.powernukkitx.blockentity.BlockEntity;
 import org.powernukkitx.entity.Entity;
 import org.powernukkitx.entity.effect.Effect;
@@ -58,6 +60,7 @@ public abstract class Block extends Position implements Metadatable, AxisAligned
     protected BlockState blockstate;
     protected BlockColor color;
     public int layer;
+    private BlockType type;
 
     public static boolean isNotActivate(Player player) {
         if (player == null) {
@@ -1854,6 +1857,25 @@ public abstract class Block extends Position implements Metadatable, AxisAligned
 
     public boolean isTickingDisabled() {
         return isTickingDisabled(this.getLevel(), getId());
+    }
+
+    public BlockType getBlockType() {
+        BlockType blockType = this.type;
+        if (blockType != null) {
+            return blockType;
+        }
+
+        if (this instanceof CustomBlock customBlock) {
+            blockType = BlockTypes.get(customBlock.getId());
+        } else if (this.isAir()) {
+            blockType = BlockTypes.AIR;
+        }
+
+        if (blockType == null) {
+            log.warn("Failed to initialize block type {}: {}", this.getName(), this.getId());
+            blockType = BlockTypes.AIR;
+        }
+        return blockType;
     }
 
     @Override

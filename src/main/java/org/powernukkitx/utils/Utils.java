@@ -713,4 +713,9 @@ public class Utils {
             return "unknown";
         }
     }
+
+    public static void writeFileWithCRLF(Path path, String content) throws IOException {
+        String crlfContent = content.replace("\n", "\r\n");
+        Files.writeString(path, crlfContent);
+    }
 }

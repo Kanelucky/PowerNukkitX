@@ -6,6 +6,7 @@ import org.powernukkitx.block.Block;
 import org.powernukkitx.block.BlockAir;
 import org.powernukkitx.block.BlockID;
 import org.powernukkitx.block.BlockState;
+import org.powernukkitx.block.customblock.CustomBlock;
 import org.powernukkitx.entity.Entity;
 import org.powernukkitx.event.item.ItemWearEvent;
 import org.powernukkitx.event.player.PlayerItemConsumeEvent;
@@ -13,6 +14,8 @@ import org.powernukkitx.inventory.HumanInventory;
 import org.powernukkitx.item.customitem.CustomItem;
 import org.powernukkitx.item.customitem.CustomItemDefinition;
 import org.powernukkitx.item.enchantment.Enchantment;
+import org.powernukkitx.item.type.ItemType;
+import org.powernukkitx.item.type.ItemTypes;
 import org.powernukkitx.item.utils.ItemArmorType;
 import org.powernukkitx.level.Level;
 import org.powernukkitx.level.Sound;
@@ -86,6 +89,7 @@ public abstract class Item implements Cloneable, ItemID {
     protected String id;
     protected Identifier identifier;
     protected String name;
+    protected ItemType type;
     public int meta;
     public int count;
     protected Integer netId = null;
@@ -2808,6 +2812,18 @@ public abstract class Item implements Cloneable, ItemID {
                 this.customComponents() != null,
                 this.customComponents() == null ? null : this.customComponents().toNetwork()
         );
+    }
+
+    public ItemType getItemType() {
+        if (this.type == null) {
+            return this.type;
+        }
+        Item item = this;
+        this.type = ItemTypes.get(item.getId());
+        if (this.type == null) {
+            throw new IllegalStateException("Failed to initialize item type " + this.getName() + ": " + this.getId() + ":" + this.getDamage());
+        }
+        return this.type;
     }
 
     private static String[] listTagToStringArray(ListTag<StringTag> tags) {
