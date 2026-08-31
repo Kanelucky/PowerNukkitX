@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * <a href="https://github.com/AllayMC/Allay/blob/master/codegen/src/main/java/org/allaymc/codegen/ItemClassGen.java">Source of inspiration</a>
  *
- * @author Kanelucky
+ * @author Kanelucky | AllayMC
  */
 public class ItemClassGen {
 
