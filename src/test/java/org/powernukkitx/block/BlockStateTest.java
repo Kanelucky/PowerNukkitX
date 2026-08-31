@@ -3,6 +3,7 @@ package org.powernukkitx.block;
 import org.powernukkitx.Server;
 import org.powernukkitx.block.property.CommonBlockProperties;
 import org.powernukkitx.block.property.type.BlockPropertyType;
+import org.powernukkitx.block.type.BlockTypes;
 import org.powernukkitx.registry.BlockRegistry;
 import org.powernukkitx.registry.Registries;
 import lombok.SneakyThrows;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class BlockStateTest {
-
 
     @Test
     @SneakyThrows

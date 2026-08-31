@@ -8,6 +8,7 @@ import com.palantir.javapoet.ParameterizedTypeName;
 import com.palantir.javapoet.TypeSpec;
 import lombok.SneakyThrows;
 import org.powernukkitx.block.BlockID;
+import org.powernukkitx.block.BlockState;
 import org.powernukkitx.utils.Utils;
 
 import javax.lang.model.element.Modifier;

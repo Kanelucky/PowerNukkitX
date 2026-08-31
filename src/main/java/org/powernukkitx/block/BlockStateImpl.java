@@ -1,6 +1,8 @@
 package org.powernukkitx.block;
 
 import org.powernukkitx.block.property.type.BlockPropertyType;
+import org.powernukkitx.block.type.BlockType;
+import org.powernukkitx.block.type.BlockTypes;
 import org.powernukkitx.network.NetworkConstants;
 import org.powernukkitx.utils.HashUtils;
 import com.google.common.base.Preconditions;
@@ -70,6 +72,11 @@ public record BlockStateImpl(String identifier,
     @Override
     public String getIdentifier() {
         return identifier;
+    }
+
+    @Override
+    public BlockType getBlockType() {
+        return BlockTypes.get(identifier);
     }
 
     @Override

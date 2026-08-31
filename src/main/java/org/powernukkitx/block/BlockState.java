@@ -1,6 +1,7 @@
 package org.powernukkitx.block;
 
 import org.powernukkitx.block.property.type.BlockPropertyType;
+import org.powernukkitx.block.type.BlockType;
 import org.powernukkitx.item.Item;
 import org.powernukkitx.level.Position;
 import org.powernukkitx.registry.Registries;
@@ -36,6 +37,8 @@ public interface BlockState {
     }
 
     String getIdentifier();
+
+    BlockType getBlockType();
 
     int blockStateHash();
 
